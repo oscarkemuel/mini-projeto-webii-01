@@ -23,3 +23,11 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.get('/', async ({ view }) => {
   return view.render('welcome')
 })
+
+// Route.get('/estudante', async ({ view }) => {
+//     return view.render('estudante/form_estudante')
+// })
+
+Route.get('estudante', 'EstudantesController.index')
+Route.post('estudante/register', 'EstudantesController.register')
+

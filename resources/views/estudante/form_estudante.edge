@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini-projeto 01 - Formulário</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <main>
+    <form action="{{ route('EstudantesController.register') }}" method="POST">
+        <p>Primeiro Nome: <input type="text" name="firstName" placeholder="Insira seu nome" value="{{ flashMessages.get('firstName') || '' }}" /></p>
+        <p>Último Nome: <input type="text" name="lastName" placeholder="Insira seu último nome" value="{{ flashMessages.get('lastName') || '' }}" /></p>
+        <p>Curso: 
+            <select name="curso">
+                @each(curso in cursos)
+                    <option value={{curso.name}}> {{ curso.name }} </option>
+                @end
+            </select>
+        </p>
+        <p> 
+            <input type="radio" id="java" name="linguagem" value="Java">
+            <label for="java">Java</label><br>
+            <input type="radio" id="c" name="linguagem" value="C">
+            <label for="c">C</label><br>
+            <input type="radio" id="python" name="linguagem" value="Python">
+            <label for="python">Python</label><br>
+            <input type="radio" id="javascript" name="linguagem" value="Javascript">
+            <label for="javascript">Javascript</label>
+        </p>
+        <p>
+            <input type="checkbox" name="sistemaOperacional" value="OSX" id="OSX" />
+            <label for="OSX">OSX</label><br>
+            <input type="checkbox" name="sistemaOperacional" value="Windows" id="windows" />
+            <label for="windows">Windows</label><br>
+            <input type="checkbox" name="sistemaOperacional" value="Linux" id="linux" />
+            <label for="linux">Linux</label><br>
+        </p>
+        <p><input type="submit" value="Adicionar" /></p>
+    </form>
+  </main>
+</body>
+</html>
