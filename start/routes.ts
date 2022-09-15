@@ -30,4 +30,5 @@ Route.get('/', async ({ view }) => {
 
 Route.get('estudante', 'EstudantesController.index')
 Route.post('estudante/register', 'EstudantesController.register')
+Route.get('estudante/getListaEstudantes', 'EstudantesController.showEstudantes')
 

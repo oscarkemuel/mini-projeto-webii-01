@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudante</title>
+</head>
+<body>
+       <h1><p>Olá, {{estudante.firstName}}</p></h1>
+        <p>Seja bem-vindo, {{estudante.firstName}}  {{estudante.lastName}}</p>
+        <p>Seu curso é: {{estudante.curso}}</p>
+        <p>Linguagem favorita: {{estudante.linguagem}}</p>
+        <p>Sistemas Operacionais favoritos: </p>
+        <ul>
+            @each(sistema in estudante.sistemaOperacional)
+                <li>
+                    <span>{{sistema}}</span>
+                </li>
+            @end
+        </ul>    
+
+        <br />
+        <a href="getListaEstudantes">Ver lista de estudantes</a><br />
+        <a href="showForm">Formulário de estudantes</a><br />
+    
+</body>
+</html>
