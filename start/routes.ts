@@ -12,3 +12,6 @@ Route.get('estudante/deletar/:id', 'EstudantesController.deleteEstudante')
 Route.get('estudante/getListaPorCurso', 'EstudantesController.showEstudantesPorCurso')
 Route.get('estudante/getListaPorLinguagem', 'EstudantesController.showEstudantesPorLinguagem')
 
+Route.get('curso/form', 'CursosController.showForm')
+Route.post('curso/register', 'CursosController.register')
+Route.get('curso/lista', 'CursosController.showCursos')

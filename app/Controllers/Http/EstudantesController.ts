@@ -1,6 +1,7 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import CursosService from 'App/Services/CursosService';
 import EstudantesService from 'App/Services/EstudantesService'
 
 
@@ -14,19 +15,11 @@ export interface IEstudante {
 
 export default class EstudantesController {
     public estudantesService = new EstudantesService()
+    public cursosService = new CursosService()
 
     public async showForm(ctx: HttpContextContract) {
-        const cursos = [
-            {
-                name: 'BTI'
-            },
-            {
-                name: 'EngSoft'
-            },
-            {
-                name: 'EngComp'
-            },
-        ]
+        const cursos = await this.cursosService.listaCursos();
+
         return ctx.view.render('estudante/form_estudante', { cursos })
     }
 

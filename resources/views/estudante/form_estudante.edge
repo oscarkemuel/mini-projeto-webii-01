@@ -9,15 +9,17 @@
 <body>
 
   <main>
+    <h1>Cadastrar estudante</h1>
     <form action="{{ route('EstudantesController.register') }}" method="POST">
-        <p>Primeiro Nome: <input type="text" name="primeiroNome" placeholder="Insira seu nome" value="{{ flashMessages.get('primeiroNome') || '' }}" /></p>
+    <p>Primeiro Nome: <input type="text" name="primeiroNome" placeholder="Insira seu nome" value="{{ flashMessages.get('primeiroNome') || '' }}" required /></p>
         <p>Último Nome: <input type="text" name="ultimoNome" placeholder="Insira seu último nome" value="{{ flashMessages.get('ultimoNome') || '' }}" /></p>
         <p>Curso:
-            <select name="curso">
+            <select name="curso" required>
                 @each(curso in cursos)
-                    <option value={{curso.name}}> {{ curso.name }} </option>
+                    <option value={{curso.nome}}> {{ curso.nome }} </option>
                 @end
             </select>
+            <a href="/curso/form">Cadastrar curso</a>
         </p>
         <p>
             <input type="radio" id="java" name="linguagem" value="Java">
@@ -44,6 +46,8 @@
     <a href="/estudante/getListaEstudantes">Estudantes</a><br>
     <a href="/estudante/getListaPorCurso">Estudantes por Curso</a><br>
     <a href="/estudante/getListaPorLinguagem">Estudantes por Linguagem</a><br>
+    <a href="/curso/form">Formulário de curso</a><br>
+    <a href="/curso/lista">Cursos</a><br>
       </main>
 </body>
 </html>
