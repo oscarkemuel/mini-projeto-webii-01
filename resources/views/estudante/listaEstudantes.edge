@@ -10,23 +10,18 @@
 </head>
 
 <body>
-
-
-
     <p>Lista de estudantes cadastrados: </p>
     <ul>
       @each(estudante in estudantes)
           <li>
               <span>{{estudante.primeiroNome}} {{estudante.ultimoNome}} - Curso {{estudante.curso}}</span>
+              <a href="/estudante/detalhes/{{estudante.id}}">Detalhes</a>
+              <a href="/estudante/deletar/{{estudante.id}}">Deletar</a>
           </li>
       @end
-        {{--  <li th:each="estudante : ${estudantes}">
-            <span
-                th:text="${estudante.primeiroNome} +' '+ ${estudante.ultimoNome} + ' - Curso:  ' + ${estudante.curso} " />
-        </li>  --}}
     </ul>
-    <br><br>
-    <p>Tabela com as infos</p>
+    <br>
+    <p>Tabela com as infos:</p>
     <table>
         <thead>
           <tr>
@@ -47,6 +42,9 @@
       </table>
     <br><br>
     <a href="/estudante">Formulário de estudantes</a><br>
+    <a href="/estudante/getListaEstudantes">Estudantes</a><br>
+    <a href="/estudante/getListaPorCurso">Estudantes por Curso</a><br>
+    <a href="/estudante/getListaPorLinguagem">Estudantes por Linguagem</a><br>
 
 </body>
 

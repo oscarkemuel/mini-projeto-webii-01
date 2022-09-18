@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudantes por curso</title>
+
+</head>
+
+<body>
+    <table>
+        <thead>
+          <tr>
+            <th>Curso</th>
+            <th>Estudantes</th>
+          </tr>
+        </thead>
+        <tbody>
+            @each(curso in cursos.cursos)
+              <tr>
+                <td>{{curso.curso}}</td>
+                <td>
+                  <ul>
+                    @each(estudante in curso.estudantes)
+                      <li>{{estudante.nome}}</li>
+                    @end
+                  </ul>
+                </td>
+              </tr>
+            @end
+        </tbody>
+      </table>
+    <br>
+
+    <h3>Total de Estudantes listados: {{cursos.total}}</h3>
+
+    <a href="/estudante">Formulário de estudantes</a><br>
+    <a href="/estudante/getListaEstudantes">Estudantes</a><br>
+    <a href="/estudante/getListaPorCurso">Estudantes por Curso</a><br>
+    <a href="/estudante/getListaPorLinguagem">Estudantes por Linguagem</a><br>
+  </body>
+
+</html>

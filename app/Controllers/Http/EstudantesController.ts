@@ -15,7 +15,7 @@ export interface IEstudante {
 export default class EstudantesController {
     public estudantesService = new EstudantesService()
 
-    public async index(ctx: HttpContextContract) {
+    public async showForm(ctx: HttpContextContract) {
         const cursos = [
             {
                 name: 'BTI'
@@ -44,14 +44,35 @@ export default class EstudantesController {
     public async showEstudantes({ view }: HttpContextContract) {
         const estudantes = await this.estudantesService.getListaEstudante()
 
-
-        const teste = estudantes.map((estudante) => {
-          return {
-            ...estudante,
-            sistemasOperacionas: estudante.sistemasOperacionas.split(',')
-          }
-        })
-
         return view.render('estudante/listaEstudantes', { estudantes })
+    }
+
+    public async showDetalhes({ view, request }:  HttpContextContract) {
+      const id = request.param('id');
+      const estudante = await this.estudantesService.estudantePorId(id) as IEstudante;
+
+      estudante.sistemasOperacionas = (estudante.sistemasOperacionas as string).split(',')
+
+      return view.render('estudante/detalhesEstudante', { estudante })
+    }
+
+    public async deleteEstudante({ request, response}:  HttpContextContract) {
+      const id = request.param('id');
+
+      await this.estudantesService.deletaEstudante(id)
+
+      return response.redirect('/estudante/getListaEstudantes')
+    }
+
+    public async showEstudantesPorCurso({ view }: HttpContextContract) {
+      const cursos = await this.estudantesService.estudantesPorCurso();
+
+      return view.render('estudante/estudantesPorCurso', { cursos });
+    }
+
+    public async showEstudantesPorLinguagem({ view }: HttpContextContract) {
+      const linguagens = await this.estudantesService.estudantesPorLinguagem();
+
+      return view.render('estudante/estudantesPorLinguagem', { linguagens });
     }
 }
