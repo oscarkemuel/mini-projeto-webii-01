@@ -5,11 +5,11 @@ import EstudantesService from 'App/Services/EstudantesService'
 
 
 export interface IEstudante {
-    firstName: string;
-    lastName: string;
+    primeiroNome: string;
+    ultimoNome: string;
     curso: string;
     linguagem: string;
-    sistemaOperacional: string[]; 
+    sistemasOperacionas: string | string[];
 }
 
 export default class EstudantesController {
@@ -33,13 +33,24 @@ export default class EstudantesController {
     public async register(ctx:  HttpContextContract) {
         const estudantePayload = ctx.request.all() as IEstudante;
 
-        const estudante = this.estudantesService.salvarEstudante(estudantePayload)
+        const hasManySystems = Array.isArray(estudantePayload.sistemasOperacionas);
+        if(!hasManySystems) estudantePayload.sistemasOperacionas = [`${estudantePayload.sistemasOperacionas}`]
+
+        const estudante = await this.estudantesService.salvarEstudante(estudantePayload)
 
         return ctx.view.render('estudante/paginaEstudante', { estudante });
     }
 
     public async showEstudantes({ view }: HttpContextContract) {
-        const estudantes = this.estudantesService.getListaEstudante()
+        const estudantes = await this.estudantesService.getListaEstudante()
+
+
+        const teste = estudantes.map((estudante) => {
+          return {
+            ...estudante,
+            sistemasOperacionas: estudante.sistemasOperacionas.split(',')
+          }
+        })
 
         return view.render('estudante/listaEstudantes', { estudantes })
     }

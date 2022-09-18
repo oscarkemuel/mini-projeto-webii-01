@@ -1,16 +1,23 @@
 import { IEstudante } from "App/Controllers/Http/EstudantesController";
+import Estudante from "App/Models/Estudante";
 
 class EstudantesService {
-    private estudantes: IEstudante[] = [];
+    public async salvarEstudante(estudantePayload: IEstudante):  Promise<IEstudante> {
+        const estudante = await Estudante.create({
+          primeiroNome: estudantePayload.primeiroNome,
+          ultimoNome: estudantePayload.ultimoNome,
+          curso: estudantePayload.curso,
+          linguagem: estudantePayload.linguagem,
+          sistemasOperacionas: estudantePayload.sistemasOperacionas,
+        })
 
-    public salvarEstudante(estudantePayload: IEstudante):  IEstudante {
-        this.estudantes.push(estudantePayload)
-        
-        return estudantePayload;
+        return estudante;
     }
 
-    public getListaEstudante(): IEstudante[] {
-        return this.estudantes;
+    public async getListaEstudante(): Promise<Estudante[]> {
+      const estudantes = await Estudante.all();
+
+      return estudantes;
     }
 
 }
